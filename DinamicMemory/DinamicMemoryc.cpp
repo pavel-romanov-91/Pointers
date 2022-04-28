@@ -20,4 +20,16 @@ void main()
 		cout << arr[i] << tab;
 	}
 	cout << endl;
+	cout << "Массив even: " << tab;
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] % 2 == 0) cout << arr[i] << tab;
+	}
+	cout << endl;
+	cout << "Массив odd:" << tab;
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] % 2 != 0) cout << arr[i] << tab;
+	}
+	cout << endl;
 }
