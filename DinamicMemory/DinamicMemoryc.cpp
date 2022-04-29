@@ -8,7 +8,7 @@ void main()
 	setlocale(LC_ALL, "");
 	int n;
 	cout << "Введите размер массива: "; cin >> n;
-
+	cout << "Исходный массив: ";
 	int* arr = new int[n];
 
 	for (int i = 0; i < n; i++)
