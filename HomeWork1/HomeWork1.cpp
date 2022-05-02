@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 
 #define tab "\t"
@@ -11,14 +11,14 @@ void main()
 {
     setlocale(LC_ALL, "");
     int n;
-    cout << "Ââåäèòå ðàçìåð ìàññèâà: "; cin >> n;
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¼Ð°ÑÑÐ¸Ð²Ð°: "; cin >> n;
     int* arr = new int[n];
    // cout << typeid(arr).name() << endl;
     Fillrand(arr, n);
     Print(arr, n);
     cout << endl;
     int value;
-    cout << "Ââåäèòå äîáàâëÿåìîå çíà÷åíèå: "; cin >> value;
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ: "; cin >> value;
     Substitution(arr, n, value);
     Print(arr, n);
     delete[]arr;
