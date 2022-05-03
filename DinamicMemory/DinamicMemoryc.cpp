@@ -8,6 +8,8 @@ using namespace std;
 
 void Fillrand(int arr[], const int n);
 void Print(int* arr, const int n);
+int* push_back(int arr[], int n, int value);
+
 
 void main()
 {
@@ -77,10 +79,12 @@ void main()
 	cout << endl;
 	int value;
 	cout << "Введите добавляемое значение: "; cin >> value;
-	arr[n] = value;
-	n++;
-	Print(arr, n);
-	//delete[] arr;
+	arr = push_back(arr, n, value);
+	Print(arr, n+1);
+	delete[] arr;
+	
+	//arr[n] = value;
+	//n++;
 	/*int value;
 	cout << "Введите добавляемое значение: "; cin >> n;
 	arr[n] = value;
@@ -115,4 +119,20 @@ void Print(int* arr, const int n)
 	{
 		cout << arr[i] << tab;
 	}
+}
+int* push_back(int arr[], int n, int value)
+{
+	//Создаем буферный массив нужного размера.
+	int* buffer = new int[n + 1];
+	//Копируем все данные из исходного массива в буферный масив
+	for (int i = 0; i < n; i++) buffer[i] = arr[i];
+	//После того, как данные скопированы в новый массивб старый удалем
+	delete[]arr;
+	//Подменяем адрес старого массива адресом нового массива
+	arr = buffer;
+	//Только после всего этого в новый элемент можно добавить значение
+	arr[n] = value;
+	//После добавления элемента в массив, количества его элементов
+	n++;
+	return arr;
 }
