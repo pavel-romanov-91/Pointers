@@ -1,28 +1,41 @@
 ﻿#include<iostream>
 using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 
 #define tab "\t"
 //#define TASK
 //#define IASK_1
 #define TASK_2
 
+//#define DYNAMIC_MEMORI_1
+#define DYNAMIC_MEMORI_2
+
 void Fillrand(int arr[], const int n);
+void Fillrand(int** arr, const int rows, const int cols);
+
 void Print(int* arr, const int n);
-int* push_back(int arr[], int n, int value);
+void Print(int** arr, const int rows, const int cols);
+
+int* push_back(int arr[], int& n, int value);
 
 
 void main()
 {
-	setlocale(LC_ALL, "");
+	setlocale(LC_ALL, ""); 
+
+#ifdef DYNAMIC_MEMORI_1
+
 #ifdef TASK
-	int n;
+		int n;
 	cout << "Введите размер массива: "; cin >> n;
 	//cout << "Исходный массив: ";
 	int* arr = new int[n];
-	
+
 	for (int i = 0; i < n; i++)
 	{
-		*(arr+i) = rand() % 100;
+		*(arr + i) = rand() % 100;
 	}
 	for (int i = 0; i < n; i++)
 	{
@@ -30,7 +43,7 @@ void main()
 	}
 	cout << endl;
 
-	
+
 
 #endif // TASK
 #ifdef TASK_1
@@ -43,7 +56,7 @@ void main()
 	for (int i = 0; i < 10; i++)
 	{
 		cout << evan[i] << tab;
-	} 
+	}
 	for (int i = 0; i < 10; i++)
 	{
 		if (evan[i] % 2 == 0) cout << evan[i] << tab;
@@ -74,15 +87,15 @@ void main()
 
 	int* arr = new int[n];
 	cout << typeid(arr).name() << endl;
-	Fillrand(arr, n);
-	Print(arr, n);
+	//Fillrand(arr, n);
+	//Print(arr, n);
 	cout << endl;
 	int value;
 	cout << "Введите добавляемое значение: "; cin >> value;
 	arr = push_back(arr, n, value);
-	Print(arr, n+1);
+	//Print(arr, n);
 	delete[] arr;
-	
+
 	//arr[n] = value;
 	//n++;
 	/*int value;
@@ -100,6 +113,33 @@ void main()
 
 	delete[] arr;*/
 #endif // TASK_2
+#endif // DYNAMIC_MEMORI_1
+#ifdef DYNAMIC_MEMORI_2
+	int rows;
+	int cols;
+	cout << "Введите количество строк: ";				cin >> rows;
+	cout << "Введите количество элементов строки: ";    cin >> cols;
+	//создаем массив укозателей
+	int** arr = new int* [rows];
+	//создаем строки двумерного массива
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols] {};
+	}
+	//обращение к элементам двумерного динамического массива
+	Fillrand(arr, rows, cols);
+	Print(arr, rows, cols);
+	//удаление массива
+	//удаление строки
+	for (int i = 0; i < rows; i++)
+	{
+		delete[]arr[i];
+	}
+	// удаление массива укозателей
+	delete[]arr;
+
+#endif // DYNAMIC_MEMORI_2
+
 
 }
 
@@ -109,7 +149,17 @@ void Fillrand(int arr[], const int n)
 	{
 		*(arr + i) = rand() % 100;
 	}
-	
+
+}
+void Fillrand(int** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			arr[i][j] = rand() % 100;
+		}
+	}
 }
 
 void Print(int* arr, const int n)
@@ -120,7 +170,19 @@ void Print(int* arr, const int n)
 		cout << arr[i] << tab;
 	}
 }
-int* push_back(int arr[], int n, int value)
+void Print(int** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
+}
+
+int* push_back(int arr[], int& n, int value)
 {
 	//Создаем буферный массив нужного размера.
 	int* buffer = new int[n + 1];
@@ -135,4 +197,6 @@ int* push_back(int arr[], int n, int value)
 	//После добавления элемента в массив, количества его элементов
 	n++;
 	return arr;
+
+
 }
