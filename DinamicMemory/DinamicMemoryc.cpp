@@ -12,11 +12,15 @@ using std::endl;
 //#define DYNAMIC_MEMORI_1
 #define DYNAMIC_MEMORI_2
 
+void Allocate(int **&arr, int &rows, int &cols);
+void Clear(int **&arr, int&rows);
+
+
 void Fillrand(int arr[], const int n);
-void Fillrand(int** arr, const int rows, const int cols);
+void Fillrand(int** arr, int &rows, int &cols);
 
 void Print(int* arr, const int n);
-void Print(int** arr, const int rows, const int cols);
+void Print(int** arr, int &rows, int &cols);
 
 int* push_back(int arr[], int& n, int value);
 
@@ -114,35 +118,50 @@ void main()
 	delete[] arr;*/
 #endif // TASK_2
 #endif // DYNAMIC_MEMORI_1
+
 #ifdef DYNAMIC_MEMORI_2
 	int rows;
 	int cols;
 	cout << "Введите количество строк: ";				cin >> rows;
 	cout << "Введите количество элементов строки: ";    cin >> cols;
 	//создаем массив укозателей
-	int** arr = new int* [rows];
 	//создаем строки двумерного массива
-	for (int i = 0; i < rows; i++)
-	{
-		arr[i] = new int[cols] {};
-	}
 	//обращение к элементам двумерного динамического массива
+	int** arr;
+	Allocate(arr, rows, cols);
 	Fillrand(arr, rows, cols);
 	Print(arr, rows, cols);
+	Clear(arr, rows);
 	//удаление массива
 	//удаление строки
-	for (int i = 0; i < rows; i++)
-	{
-		delete[]arr[i];
-	}
 	// удаление массива укозателей
-	delete[]arr;
+	
+	
+	
+	
 
 #endif // DYNAMIC_MEMORI_2
 
 
 }
 
+void Allocate(int **&arr, int &rows, int &cols)
+{
+	arr = new int* [rows];
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols] {};
+	}
+}
+void Clear(int**& arr, int& rows)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		delete[]arr[i];
+	}
+	delete[]arr;
+	arr = nullptr;
+}
 void Fillrand(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
@@ -151,7 +170,7 @@ void Fillrand(int arr[], const int n)
 	}
 
 }
-void Fillrand(int** arr, const int rows, const int cols)
+void Fillrand(int** arr, int &rows, int &cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
@@ -170,7 +189,7 @@ void Print(int* arr, const int n)
 		cout << arr[i] << tab;
 	}
 }
-void Print(int** arr, const int rows, const int cols)
+void Print(int** arr, int &rows, int &cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
